@@ -34,7 +34,7 @@ using Distributed
 # No ParallelStencil or CUDA initialization
 
 # Load custom functions from the folder src
-include("../src/funcions_article.jl")
+include("../src/functions_article.jl")
 
 # OpenMP-specific helper methods using LLVMOpenMP_jll
 """
