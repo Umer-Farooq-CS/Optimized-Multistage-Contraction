@@ -1,6 +1,6 @@
 # Quantum Circuit Simulation with Tensor Networks
 
-This project focuses on simulating quantum circuits using tensor networks and implementing parallel algorithms to enhance performance. The simulation leverages the concept of Matrix Product States (MPS) and employs OpenCL for parallel execution.
+A high-performance Julia library for simulating quantum circuits using tensor network contraction with community detection algorithms.
 
 ## Project Overview
 
@@ -8,68 +8,87 @@ The primary objective is to simulate quantum circuits by representing the quantu
 
 ## Features
 
-- **Quantum Circuit Simulation**: Simulate quantum circuits by representing the quantum state as an MPS tensor network.
-- **Parallel Execution**: Utilize OpenCL to parallelize the tensor contraction process, enhancing performance.
+- **Quantum Circuit Simulation**: Quantum Fourier Transform (QFT) circuit simulation
+- **Parallel Execution**: Parallel tensor contraction using Julia's multithreading and OpenMP
 - **Scalability**: Evaluate the scalability of the simulation by testing with various quantum circuits and system sizes.
 
 ## Prerequisites
 
 To run the simulation and parallel execution, ensure the following dependencies are installed:
 
-- **Python**: Version 3.7 or higher
-- **NumPy**: For numerical operations
-- **pyopencl**: For OpenCL bindings in Python
-- **OpenCL**: Ensure that your system has an OpenCL-compatible device and the necessary drivers installed
+- **Python**: Version 3.11
+- **Julia**: For simulating quantum circuits
+- **OpenMP**: For Parallelization
+- **Essential Libraries**: Add following in Julia
+- 
+   ```bash
+      import Pkg
+      Pkg.add("TimerOutputs")
+      Pkg.add("ProfileView")
+      Pkg.add("QXTools")
+      Pkg.add("QXGraphDecompositions")
+      Pkg.add("QXZoo")
+      Pkg.add("DataStructures")
+      Pkg.add("QXTns")
+      Pkg.add("NDTensors")
+      Pkg.add("ITensors")
+      Pkg.add("LightGraphs")
+      Pkg.add("PyCall")
+      Pkg.add("Metis")
+      Pkg.add("SparseArrays")
+      Pkg.add("Statistics")
+      Pkg.add("FlameGraphs")
+      global packages_installed = true
+   ```
+   
+   
 
 ## Installation
 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/quantum-circuit-simulation.git
-   cd quantum-circuit-simulation
+   git clone https://github.com/Umer-Farooq-CS/Optimized-Multistage-Contraction.git
 
-2. Install Python dependencies:
+2. Install julia dependencies:
+   - Download and install Julia from [https://julialang.org/](https://julialang.org/).
 
-  ```bash
-  pip install -r requirements.txt
-  ```
-
-3. Ensure OpenCL is set up on your system. Refer to your device manufacturer's instructions for installation.
+3. Ensure Libraries are already installed
 
 ## Usage
+1. For running Basic Code (Using ComPar Algorithm):
 
-### Serial Simulation
+   ```bash
+       julia --project=. --track-allocation=user default.jl
+   
+2. For running OpenMP Code:
 
-  To run the quantum circuit simulation in serial mode:
-  
-  ```bash
-    python simulate.py --serial
-  ```
-  
-  This command will execute the simulation without parallelization, providing a baseline performance measurement.
+   ```bash
+      julia --project=. --track-allocation=user OpenMP.jl
+   
+3. For running Final Code (Metis + OpenMP)
 
-### Parallel Simulation with OpenCL
-
-  To run the simulation with parallel execution using OpenCL:
-
-  ```bash
-    python simulate.py --parallel
-  ```
-  This command will utilize OpenCL to parallelize the tensor contraction process, aiming to improve performance.
-
+   ```bash
+      julia --project=. --track-allocation=user Final.jl
+   
 ## Project Structure
 
   ```bash
-quantum-circuit-simulation/
+
+Optimized-Multistage-Contraction
 ├── src/
-│   ├── simulate.py          # Main simulation script
-│   ├── tensor_network.py    # Tensor network operations
-│   └── opencl_utils.py      # OpenCL utility functions
-├── tests/
-│   └── test_simulation.py   # Unit tests for simulation
-├── requirements.txt         # Python dependencies
-└── README.md                # Project documentation
+│   ├──scripts/
+│   │   ├── Final.jl
+│   │   ├── OpenMP.jl
+│   │   ├── default.jl
+│   ├── METIS_partitioning.jl          # Contain Helper Functions for METIS and OpenMP
+│   ├── TensorContraction_OpenMP.jl    # Contain Helper Functions for OpenMP
+│   └── functions_article.jl           # Contain Helper Functions for ComPar and Creating Circuits
+├── Report/
+│   └── PDC Project Report.pdf
+├── Presentation/
+│   └── 22I-0891_22I-0893_22I-0911_D.pptx
+│   └── A Community Detection-Based Parallel Algorithm for Quantum Circuit Simulation.pdf
 
 ```
 
